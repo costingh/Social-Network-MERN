@@ -3,7 +3,7 @@ import {Users} from '../../dummyData';
 import Online from '../online/Online';
 
 function Rightbar({profile}) {
-
+    const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     const HomeRightbar = () => {
         return (
           <>
@@ -48,7 +48,7 @@ function Rightbar({profile}) {
             <div className="rightbarFollowings">
                 <div className="rightbarFollowing">
                     <img
-                      src="assets/person/1.jpeg"
+                      src={`${PF}person/1.jpeg`}
                       alt=""
                       className="rightbarFollowingImg"
                     />
