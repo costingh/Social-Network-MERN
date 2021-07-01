@@ -21,7 +21,7 @@ function Feed() {
             <div className="feedWrapper">
                 <Share/>
                 {posts.map((p) => {
-                    return <Post key={p.id} post={p}/>
+                    return <Post key={p._id} post={p}/>
                 })}
             </div>
         </div>
