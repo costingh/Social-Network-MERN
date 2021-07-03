@@ -6,8 +6,8 @@ import { withStyles } from '@material-ui/core/styles';
 import {styles} from './loginPageStyle'
 import { Link } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
-function Login(props) {
-  const { classes } = props;
+
+function Login({ classes }) {
   const {user, isFetching, error, dispatch} = useContext(AuthContext);
 
   const handleClick = (e) => {
