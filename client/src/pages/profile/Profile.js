@@ -29,7 +29,7 @@ function Profile() {
           <Sidebar />
           <div className="profileRight">
             <div className="profileRightTop">
-              <div className="profileCover">
+              <div className="profileCover"> 
                 <img
                   className="profileCoverImg"
                   src={user.coverPicture || PF+"person/noCover.png"}

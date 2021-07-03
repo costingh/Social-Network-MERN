@@ -62,7 +62,7 @@ function Rightbar({user}) {
             </div>
           </>
         );
-      };
+      }; 
 
     return (
         <div className="rightbar">
