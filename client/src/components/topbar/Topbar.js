@@ -1,59 +1,65 @@
-import './Topbar.css'
 import { Search, Person, Chat, Notifications } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { withStyles } from '@material-ui/core/styles';
+import {styles} from './topbarStyle'
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 
-function Topbar() {
+function Topbar({ classes }) {
     const { user } = useContext(AuthContext);
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
     return (
-        <div className="topbarContainer">
-            <div className="topbarLeft">
+        <div className={classes.topbarContainer}>
+            <div className={classes.topbarLeft}>
             <Link to='/' style={{textDecoration: 'none'}}>
-                <span className="logo">Social</span>
+                <span className={classes.logo}>Social</span>
             </Link>
             </div>
-            <div className="topbarCenter">
-                <div className="searchbar">
-                    <Search className="searchIcon"/>
-                    <input placeholder="Search for friends or posts" className="searchInput" />
+            <div className={classes.topbarCenter}>
+                <div className={classes.searchbar}>
+                    <Search className={classes.searchIcon}/>
+                    <input placeholder="Search for friends or posts" className={classes.searchInput} />
                 </div>
             </div>
-            <div className="topbarRight">
-                <div className="topbarLinks">
-                    <span className="topbarLink">Homepage</span>
-                    <span className="topbarLink">Timeline</span>
+            <div className={classes.topbarRight}>
+                <div className={classes.topbarLinks}>
+                    <span className={classes.topbarLink}>Homepage</span>
+                    <span className={classes.topbarLink}>Timeline</span>
                 </div>
-                <div className="topbarIcons">
-                    <div className="topbarIconItem">
+                <div className={classes.topbarIcons}>
+                    <div className={classes.topbarIconItem}>
                         <Person/>
-                        <span className="topbarIconBadge">1</span>
+                        <span className={classes.topbarIconBadge}>1</span>
                     </div>
-                    <div className="topbarIconItem">
+                    <div className={classes.topbarIconItem}>
                         <Chat/>
-                        <span className="topbarIconBadge">3</span>
+                        <span className={classes.topbarIconBadge}>3</span>
                     </div>
-                    <div className="topbarIconItem">
+                    <div className={classes.topbarIconItem}>
                         <Notifications/>
-                        <span className="topbarIconBadge">1</span>
+                        <span className={classes.topbarIconBadge}>1</span>
                     </div>
                 </div>
-                <Link to={`/profile/${user.username}`}>
-                    <img
-                        src={
-                        user.profilePicture
-                            ? PF + user.profilePicture
-                            : PF + "person/noAvatar.png"
-                        }
-                        alt=""
-                        className="topbarImg"
-                    />
-                </Link>
+                <div className={classes.userInfo}>
+                    <Link to={`/profile/${user.username}`} style={{textDecoration:'none', display: 'flex', alignItems: 'center'}}>
+                        <img
+                            src={
+                            user.profilePicture
+                                ? PF + user.profilePicture
+                                : PF + "person/noAvatar.png"
+                            }
+                            alt=""
+                            className={classes.topbarImg}
+                        />
+                        <p className={classes.username}>{user.username}</p>
+                    </Link>
+                    <KeyboardArrowDownIcon className={classes.downArrow}/>
+                </div>
             </div>
         </div>
     )
 }
 
-export default Topbar
+export default withStyles(styles)(Topbar);
