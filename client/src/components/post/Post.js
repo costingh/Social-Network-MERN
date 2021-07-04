@@ -3,7 +3,6 @@ import { format } from 'timeago.js'
 import { Link } from 'react-router-dom';
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios"
-import './post.css';
 import {MoreVert} from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 import {styles} from './postStyle'

@@ -1,14 +1,16 @@
 import React from 'react'
+import { withStyles } from '@material-ui/core/styles';
+import {styles} from './closeFriendStyle'
 
-function CloseFriend({user}) {
+function CloseFriend({user, classes}) {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
     return (
-        <li className="sidebarFriend">
-            <img src={PF + user.profilePicture} alt="" className="sidebarFriendImg"/>
-            <span className="sidebarFriendName">{user.username}</span>
+        <li className={classes.sidebarFriend}>
+            <img src={PF + user.profilePicture} alt="" className={classes.sidebarFriendImg}/>
+            <span className={classes.sidebarFriendName}>{user.username}</span>
         </li>
     )
 }
 
-export default CloseFriend
+export default withStyles(styles)(CloseFriend);
