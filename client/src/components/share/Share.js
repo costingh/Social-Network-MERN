@@ -2,10 +2,10 @@ import { PermMedia, Label, Room, EmojiEmotions, Cancel } from '@material-ui/icon
 import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
+import { withStyles } from '@material-ui/core/styles';
+import {styles} from './shareStyle';
 
-import './share.css';
-
-function Share() {
+function Share({classes}) {
     const { user } = useContext(AuthContext);
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     const desc = useRef();
@@ -39,11 +39,11 @@ function Share() {
     };
 
     return (
-        <div className="share">
-            <div className="shareWrapper">
-                <div className="shareTop">
+        <div className={classes.share}>
+            <div className={classes.shareWrapper}>
+                <div className={classes.shareTop}>
                     <img
-                        className="shareProfileImg"
+                        className={classes.shareProfileImg}
                         src={
                         user.profilePicture
                             ? PF + user.profilePicture
@@ -53,22 +53,22 @@ function Share() {
                     />
                     <input
                         placeholder={"What's in your mind " + user.username + "?"}
-                        className="shareInput"
+                        className={classes.shareInput}
                         ref={desc}
                     />
                 </div>
-                <hr className="shareHr"/>
+                <hr className={classes.shareHr}/>
                 {file && (
-                    <div className="shareImgContainer">
-                        <img className="shareImg" src={URL.createObjectURL(file)} alt="" />
-                        <Cancel className="shareCancelImg" onClick={() => setFile(null)} />
+                    <div className={classes.shareImgContainer}>
+                        <img className={classes.shareImg} src={URL.createObjectURL(file)} alt="" />
+                        <Cancel className={classes.shareCancelImg} onClick={() => setFile(null)} />
                     </div>
                 )}
-                <form className="shareBottom" onSubmit={submitHandler}>
-                    <div className="shareOptions">
-                        <label htmlFor="file" className="shareOption">
-                            <PermMedia htmlColor="tomato" className="shareIcon"/>
-                            <span className="shareOptionText">Photo or Video</span>
+                <form className={classes.shareBottom} onSubmit={submitHandler}>
+                    <div className={classes.shareOptions}>
+                        <label htmlFor="file" className={classes.shareOption}>
+                            <PermMedia htmlColor="tomato" className={classes.shareIcon}/>
+                            <span className={classes.shareOptionText}>Photo or Video</span>
                             <input
                                 style={{ display: "none" }}
                                 type="file"
@@ -77,24 +77,24 @@ function Share() {
                                 onChange={(e) => setFile(e.target.files[0])}
                             />
                         </label>
-                        <div className="shareOption">
-                            <Label htmlColor="blue" className="shareIcon"/>
-                            <span className="shareOptionText">Tag</span>
+                        <div className={classes.shareOption}>
+                            <Label htmlColor="blue" className={classes.shareIcon}/>
+                            <span className={classes.shareOptionText}>Tag</span>
                         </div>
-                        <div className="shareOption">
-                            <Room htmlColor="green" className="shareIcon"/>
-                            <span className="shareOptionText">Location</span>
+                        <div className={classes.shareOption}>
+                            <Room  className={classes.shareIcon}/>
+                            <span className={classes.shareOptionText}>Location</span>
                         </div>
-                        <div className="shareOption">
-                            <EmojiEmotions htmlColor="goldenrod" className="shareIcon"/>
-                            <span className="shareOptionText">Feelings</span>
+                        <div className={classes.shareOption}>
+                            <EmojiEmotions htmlColor="goldenrod" className={classes.shareIcon}/>
+                            <span className={classes.shareOptionText}>Feelings</span>
                         </div>
                     </div>
-                    <button className="shareButton" type="submit">Share</button>
+                    <button className={classes.shareButton} type="submit">Share</button>
                 </form>
             </div>
         </div>
     )
 }
 
-export default Share
+export default withStyles(styles)(Share);
