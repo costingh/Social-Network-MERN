@@ -1,16 +1,17 @@
-import React from 'react'
+import { withStyles } from '@material-ui/core/styles';
+import {styles} from './onlineStyle';
 
-function Online({user}) {
+function Online({user, classes}) {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     return (
-        <li className="rightbarFriend">
-            <div className="rightbarProfileImgContainer">
-                <img src={PF+user.profilePicture} alt="" className="rightbarProfileImg"/>
-                <span className="rightbarOnline"></span>
+        <li className={classes.rightbarFriend}>
+            <div className={classes.rightbarProfileImgContainer}>
+                <img src={PF+user.profilePicture} alt="" className={classes.rightbarProfileImg}/>
+                <span className={classes.rightbarOnline}></span>
             </div>
-            <span className="rightbarUsername">{user.username}</span>
+            <span className={classes.rightbarUsername}>{user.username}</span>
         </li>
     )
 }
 
-export default Online
+export default withStyles(styles)(Online);
