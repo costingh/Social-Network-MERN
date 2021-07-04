@@ -57,7 +57,7 @@ function Sidebar({classes}) {
                 </li>
                 </ul>
                 <button className={classes.sidebarButton}>Show More</button>
-                <hr className={classes.sidebarHr}/>
+                <div className={classes.sidebarHr}/>
                 <ul className={classes.sidebarFriendList}>
                     {Users.map((u) => (
                         <CloseFriend key={u.id} user={u} />
