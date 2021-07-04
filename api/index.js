@@ -9,7 +9,7 @@ const userRoute = require('./routes/users');
 const authRoute = require('./routes/auth');
 const postRoute = require('./routes/posts');
 const conversationRoute = require('./routes/conversations');
-const messageRoute = require('./routes/message');
+const messageRoute = require('./routes/messages');
 const path = require('path');
 
 dotenv.config();
