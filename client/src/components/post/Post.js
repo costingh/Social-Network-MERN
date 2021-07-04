@@ -5,8 +5,10 @@ import { AuthContext } from "../../context/AuthContext";
 import axios from "axios"
 import './post.css';
 import {MoreVert} from '@material-ui/icons';
+import { withStyles } from '@material-ui/core/styles';
+import {styles} from './postStyle'
 
-function Post({post}) {
+function Post({post, classes}) {
     const [like, setLike] = useState(post.likes.length);
     const [isLiked, setIsLiked] = useState(false);
     const [user, setUser] = useState({});
@@ -35,35 +37,34 @@ function Post({post}) {
     };
 
     return (
-        <div className="post">
-            <div className="postWrapper">
-                <div className="postTop">
-                    <div className="postTopLeft">
+        <div className={classes.post}>
+            <div className={classes.postWrapper}>
+                <div className={classes.postTop}>
+                    <div className={classes.postTopLeft}>
                         <Link to={`profile/${user.username}`}>
-                            <img src={user.profilePicture ? PF + user.profilePicture : PF+'person/noAvatar.png'} alt="" className="postProfileImg"/>
+                            <img src={user.profilePicture ? PF + user.profilePicture : PF+'person/noAvatar.png'} alt="" className={classes.postProfileImg}/>
                         </Link>
-                        <span className="postUsername">
+                        <span className={classes.postUsername}>
                             { user.username }
                         </span>
-                        <span className="postDate">{format(post.createdAt)}</span>
+                        <span className={classes.postDate}>{format(post.createdAt)}</span>
                     </div>
-                    <div className="postTopRight">
+                    <div className={classes.postTopRight}>
                         <MoreVert/>
                     </div>
                 </div>
-                <div className="postCenter">
-                    <span className="postText">{post?.desc}</span>
-                    <img src={PF + post.img} alt="" className="postImg"/>
-                    
+                <div className={classes.postCenter}>
+                    <span className={classes.postText}>{post?.desc}</span>
+                    <img src={PF + post.img} alt="" className={classes.postImg}/>
                 </div>
-                <div className="postBottom">
-                    <div className="postBottomLeft">
-                        <img src={`${PF}like.png`} alt="" className="likeIcon" onClick={likeHandler} />
-                        <img src={`${PF}heart.png`} alt="" className="likeIcon" onClick={likeHandler} />
-                        <span className="postLikeCounter">{like} people like it</span>
+                <div className={classes.postBottom}>
+                    <div className={classes.postBottomLeft}>
+                        <img src={`${PF}like.png`} alt="" className={classes.likeIcon} onClick={likeHandler} />
+                        <img src={`${PF}heart.png`} alt="" className={classes.likeIcon} onClick={likeHandler} />
+                        <span className={classes.postLikeCounter}>{like} likes</span>
                     </div>
-                    <div className="postBottomRight">
-                        <div className="postCommentText">{post.comment } comments</div>
+                    <div className={classes.postBottomRight}>
+                        <div className={classes.postCommentText}>{post.comment } comments</div>
                     </div>
                 </div>
             </div>
@@ -71,4 +72,4 @@ function Post({post}) {
     )
 }
 
-export default Post
+export default withStyles(styles)(Post);
