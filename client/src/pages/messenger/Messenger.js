@@ -8,9 +8,11 @@ import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 
 function Messenger() {
-    const [conversations, setConversations] = useState([]);
     const { user } = useContext(AuthContext);
-
+    const [conversations, setConversations] = useState([]);
+    const [currentChat, setCurrentChat] = useState(null);
+    const [messages, setMessages] = useState([]);
+    
     useEffect(() => {
         const getConversations = async () => {
           try {
@@ -24,42 +26,64 @@ function Messenger() {
       }, [user._id]);
 
 
-    return (
+      useEffect(() => {
+        const getMessages = async () => {
+          try {
+            const res = await axios.get("/messages/" + currentChat?._id);
+            setMessages(res.data);
+          } catch (err) {
+            console.log(err);
+          }
+        };
+        getMessages();
+      }, [currentChat]);
+
+      return (
         <>
-            <Topbar/>
-            <div className="messenger">
-                <div className="chatMenu">
-                    <div className="chatMenuWrapper">
-                        <input 
-                            type="text"
-                            placeholder="Search"
-                            className="chatMenuInput"
-                        />
-                        {conversations.map((c) => (
-                            <Conversation conversation={c} currentUser={user} />
-                        ))}
-                    </div>
-                </div>
-                <div className="chatBox">
-                    <div className="chatBoxWrapper">
-                        <div className="chatBoxTop">
-                            <Message own={true}/>
-                            <Message/>
-                            <Message/>
-                            <Message/>
-                        </div>
-                        <div className="chatBoxBottom">
-                            <textarea className="chatMessageInput" placeholder="write a message..."></textarea>
-                            <button className="chatSubmitButton">Send</button>
-                        </div>
-                    </div>
-                </div>
-                <div className="chatOnline">
-                    <div className="chatOnlineWrapper">
-                        <ChatOnline/>
-                    </div>
-                </div>
+          <Topbar />
+          <div className="messenger">
+            <div className="chatMenu">
+              <div className="chatMenuWrapper">
+                <input placeholder="Search for friends" className="chatMenuInput" />
+                {conversations.map((c) => (
+                  <div onClick={() => setCurrentChat(c)}>
+                    <Conversation conversation={c} currentUser={user} />
+                  </div>
+                ))}
+              </div>
             </div>
+            <div className="chatBox">
+              <div className="chatBoxWrapper">
+                {currentChat ? (
+                  <>
+                    <div className="chatBoxTop">
+                      {messages.map((m) => (
+                        <Message message={m} own={m.sender === user._id} />
+                      ))}
+                    </div>
+                    <div className="chatBoxBottom">
+                      <textarea
+                        className="chatMessageInput"
+                        placeholder="write something..."
+                      ></textarea>
+                      <button className="chatSubmitButton">
+                        Send
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <span className="noConversationText">
+                    Open a conversation to start a chat.
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className="chatOnline">
+              <div className="chatOnlineWrapper">
+                <ChatOnline />
+              </div>
+            </div>
+          </div>
         </>
     )
 }
