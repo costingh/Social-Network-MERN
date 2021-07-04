@@ -1,6 +1,8 @@
 .rightbar {
     flex: 3.5;
-  }
+    color: #d0d3db;
+    background-color: #1b2439;  
+}
   
   .rightbarWrapper {
     padding: 20px 20px 0 0;
