@@ -43,7 +43,12 @@ function Profile({ classes }) {
               </div>
               <div className={classes.profileInfo}>
                 <h4 className={classes.profileInfoName}>{user.username} </h4>
-                <span className={classes.profileInfoDesc}>~{user.desc}~</span>
+                <span className={classes.profileInfoDesc}>
+                  {user.desc 
+                    ? `~ ${user.desc} ~` 
+                    : 'No description available'
+                  }
+                </span>
               </div>
             </div>
             <div className={classes.profileRightBottom}>

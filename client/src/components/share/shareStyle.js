@@ -67,6 +67,16 @@ export const styles = {
     "marginRight": "20px",
     "cursor": "pointer",
     background: '#ff458a',
+    border: '1px solid #ff458a',
+    color: '#111',
+    transition: 'all .3s ease',
+    '&:focus': {
+      outline: 'none'
+    },
+    '&:hover': {
+      background: 'transparent',
+      color: '#d0d3db'
+    }
   },
   "shareImgContainer": {
     "padding": "0 20px 10px 20px",
