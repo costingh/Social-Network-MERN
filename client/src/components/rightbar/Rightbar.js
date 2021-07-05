@@ -1,4 +1,3 @@
-import "./rightbar.css";
 import { Users } from "../../dummyData";
 import Online from "../online/Online";
 import { useContext, useEffect, useState } from "react";
@@ -6,8 +5,10 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { Add, Remove } from "@material-ui/icons";
+import { withStyles } from '@material-ui/core/styles';
+import {styles} from './rightbarStyle'
 
-export default function Rightbar({ user }) {
+function Rightbar({ user, classes }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
@@ -48,15 +49,15 @@ export default function Rightbar({ user }) {
   const HomeRightbar = () => {
     return (
       <>
-        <div className="birthdayContainer">
-          <img className="birthdayImg" src="assets/gift.png" alt="" />
-          <span className="birthdayText">
+        <div className={classes.birthdayContainer}>
+          <img className={classes.birthdayImg} src="assets/gift.png" alt="" />
+          <span className={classes.birthdayText}>
             <b>Pola Foster</b> and <b>3 other friends</b> have a birhday today.
           </span>
         </div>
-        <img className="rightbarAd" src="assets/ad.png" alt="" />
-        <h4 className="rightbarTitle">Online Friends</h4>
-        <ul className="rightbarFriendList">
+        <img className={classes.rightbarAd} src="assets/ad.png" alt="" />
+        <h4 className={classes.rightbarTitle}>Online Friends</h4>
+        <ul className={classes.rightbarFriendList}>
           {Users.map((u) => (
             <Online key={u.id} user={u} />
           ))}
@@ -69,24 +70,24 @@ export default function Rightbar({ user }) {
     return (
       <>
         {user.username !== currentUser.username && (
-          <button className="rightbarFollowButton" onClick={handleClick}>
+          <button className={classes.rightbarFollowButton} onClick={handleClick}>
             {followed ? "Unfollow" : "Follow"}
             {followed ? <Remove /> : <Add />}
           </button>
         )}
-        <h4 className="rightbarTitle">User information</h4>
-        <div className="rightbarInfo">
-          <div className="rightbarInfoItem">
-            <span className="rightbarInfoKey">City:</span>
-            <span className="rightbarInfoValue">{user.city}</span>
+        <h4 className={classes.rightbarTitle}>User information</h4>
+        <div className={classes.rightbarInfo}>
+          <div className={classes.rightbarInfoItem}>
+            <span className={classes.rightbarInfoKey}>City:</span>
+            <span className={classes.rightbarInfoValue}>{user.city}</span>
           </div>
-          <div className="rightbarInfoItem">
-            <span className="rightbarInfoKey">From:</span>
-            <span className="rightbarInfoValue">{user.from}</span>
+          <div className={classes.rightbarInfoItem}>
+            <span className={classes.rightbarInfoKey}>From:</span>
+            <span className={classes.rightbarInfoValue}>{user.from}</span>
           </div>
-          <div className="rightbarInfoItem">
-            <span className="rightbarInfoKey">Relationship:</span>
-            <span className="rightbarInfoValue">
+          <div className={classes.rightbarInfoItem}>
+            <span className={classes.rightbarInfoKey}>Relationship:</span>
+            <span className={classes.rightbarInfoValue}>
               {user.relationship === 1
                 ? "Single"
                 : user.relationship === 1
@@ -95,14 +96,14 @@ export default function Rightbar({ user }) {
             </span>
           </div>
         </div>
-        <h4 className="rightbarTitle">User friends</h4>
-        <div className="rightbarFollowings">
+        <h4 className={classes.rightbarTitle}>User friends</h4>
+        <div className={classes.rightbarFollowings}>
           {friends.map((friend) => (
             <Link
               to={"/profile/" + friend.username}
-              style={{ textDecoration: "none" }}
+              className={classes.linkToFriendProfile}
             >
-              <div className="rightbarFollowing">
+              <div className={classes.rightbarFollowing}>
                 <img
                   src={
                     friend.profilePicture
@@ -110,9 +111,9 @@ export default function Rightbar({ user }) {
                       : PF + "person/noAvatar.png"
                   }
                   alt=""
-                  className="rightbarFollowingImg"
+                  className={classes.rightbarFollowingImg}
                 />
-                <span className="rightbarFollowingName">{friend.username}</span>
+                <span className={classes.rightbarFollowingName}>{friend.username}</span>
               </div>
             </Link>
           ))}
@@ -121,10 +122,12 @@ export default function Rightbar({ user }) {
     );
   };
   return (
-    <div className="rightbar">
-      <div className="rightbarWrapper">
+    <div className={classes.rightbar}>
+      <div className={classes.rightbarWrapper}>
         {user ? <ProfileRightbar /> : <HomeRightbar />}
       </div>
     </div>
   );
 }
+
+export default withStyles(styles)(Rightbar);

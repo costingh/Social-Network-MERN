@@ -37,7 +37,7 @@ function Profile({ classes }) {
                 />
                 <img
                   className={classes.profileUserImg}
-                  src={user.profilePicture ? PF+user.coverPicture : PF+"person/noAvatar.png"}
+                  src={user.profilePicture ? PF+user.profilePicture : PF+"person/noAvatar.png"}
                   alt=""
                 />
               </div>

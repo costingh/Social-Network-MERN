@@ -24,7 +24,6 @@ export const styles = {
       "right": "0",
       "margin": "auto",
       "top": "150px",
-      "border": "3px solid white"
     },
     "profileInfo": {
       "display": "flex",
