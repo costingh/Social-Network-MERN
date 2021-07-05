@@ -17,7 +17,16 @@ function Messenger() {
   const [onlineUsers, setOnlineUsers] = useState([]);
   const { user } = useContext(AuthContext);
   const scrollRef = useRef();
-  
+  const socket = useRef();
+
+  useEffect(() => {
+    socket.current = io("ws://localhost:8900");
+  }, []);
+
+  useEffect(() => {
+    socket.current.emit("addUser", user._id);
+  }, [user]);
+
   useEffect(() => {
     arrivalMessage &&
       currentChat?.members.includes(arrivalMessage.sender) &&
