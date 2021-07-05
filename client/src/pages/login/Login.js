@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import {loginCall} from '../../apiCalls';
+import { useHistory } from "react-router";
 import { AuthContext } from '../../context/AuthContext';
 import { CircularProgress } from "@material-ui/core";
 import { withStyles } from '@material-ui/core/styles';
@@ -9,7 +10,8 @@ import TextField from '@material-ui/core/TextField';
 
 function Login({ classes }) {
   const {user, isFetching, error, dispatch} = useContext(AuthContext);
-
+  const history = useHistory();
+  
   const handleClick = (e) => {
 	e.preventDefault();
 	const email = document.getElementById('email').value;
@@ -18,7 +20,10 @@ function Login({ classes }) {
     loginCall(
       { email: email, password: password },
       dispatch
-    );
+	);
+	
+	history.push("/");
+	
   }
   
     return (

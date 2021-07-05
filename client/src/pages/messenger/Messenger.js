@@ -42,6 +42,7 @@ function Messenger() {
       setOnlineUsers(
         user.followings.filter((f) => users.some((u) => u.userId === f))
       );
+      console.log(user)
     });
   }, [user]);
 
