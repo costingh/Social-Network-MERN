@@ -1,14 +1,25 @@
 import { Search, Person, Chat, Notifications } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { withStyles } from '@material-ui/core/styles';
 import {styles} from './topbarStyle'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import SimplePopover from '../popover/SimplePopover';
 
 function Topbar({ classes }) {
     const { user } = useContext(AuthContext);
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+    const [anchorEl, setAnchorEl] = useState(null);
+
+    const openProfileDetails = (event) => {
+        console.log('Clicked ' + event.currentTarget )
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
 
     return (
         <div className={classes.topbarContainer}>
@@ -55,7 +66,8 @@ function Topbar({ classes }) {
                         />
                         <p className={classes.username}>{user.username}</p>
                     </Link>
-                    <KeyboardArrowDownIcon className={classes.downArrow}/>
+                    <KeyboardArrowDownIcon className={classes.downArrow} onClick={openProfileDetails} />
+                    <SimplePopover anchorEl={anchorEl} handleClose={handleClose} />
                 </div>
             </div>
         </div>

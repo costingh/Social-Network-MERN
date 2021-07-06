@@ -35,7 +35,7 @@ function Login({ classes }) {
 					onSubmit={handleClick}
 				>
 					<h1 className={classes.header}>Log In</h1>
-					<p className={classes.text}>new to this app? <Link to='/'>sign up for free</Link></p>
+					<p className={classes.text}>new to this app? <Link to='/register'>sign up for free</Link></p>
 					<TextField 
 						className={classes.textField}						
 						id='email' 
