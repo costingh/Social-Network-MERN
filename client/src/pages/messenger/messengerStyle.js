@@ -1,11 +1,12 @@
 export const styles = {
     "messenger": {
-      "height": "calc(100vh - 70px)",
+      "height": "calc(100vh - 80px)",
       "display": "flex",
-      background: '#202a41'
+      background: '#202a41',
+      overflow: 'hidden'
     },
     "chatMenu": {
-      "flex": "3.5"
+      "flex": "2.5"
     },
     "chatMenuInput": {
       "width": "90%",
@@ -18,12 +19,13 @@ export const styles = {
     },
     "chatBoxWrapper": {
       "padding": "10px",
-      "height": "100%"
+      "height": "100%",
+      background: '#202a41'
     },
     "chatBoxTop": {
       "height": "100%",
       "overflowY": "scroll",
-      "paddingRight": "10px"
+      "paddingRight": "10px",
     },
     "chatBoxBottom": {
       "marginTop": "5px",
@@ -50,18 +52,27 @@ export const styles = {
     },
     "chatMenuWrapper": {
       "padding": "10px",
-      "height": "100%"
+      "height": "100%",
+      background: '#202a41'
     },
     "chatOnlineWrapper": {
       "padding": "10px",
-      "height": "100%"
+      "height": "100%",
+      background: '#202a41',
+    },
+    conversationsPanel: {
+      height: '90%',
+      overflowY: 'scroll',
+      padding: '40px 15px'
     },
     "noConversationText": {
       "position": "absolute",
+      left: '50%',
+      transform: 'translateX(-50%)',
       "top": "10%",
-      "fontSize": "50px",
+      "fontSize": "19px",
       "color": "rgb(224, 220, 220)",
-      "cursor": "default"
+      "cursor": "default",
     },
     "@media screen and (max-width: 768px)": {
       "__expression__": "screen and (max-width: 768px)",
@@ -77,5 +88,9 @@ export const styles = {
       "chatOnline": {
         "flex": "1px"
       }
-    }
+    },
+    header: {
+      fontSize: '19px',
+      color: '#cdd1d9',
+  },
   }

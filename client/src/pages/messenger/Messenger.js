@@ -8,6 +8,8 @@ import axios from "axios";
 import {io} from "socket.io-client";
 import { withStyles } from '@material-ui/core/styles';
 import {styles} from './messengerStyle'
+import Contact from '../../components/contact/Contact';
+import SearchUser from "../../components/search/SearchUser";
 
 function Messenger({classes}) {
   const [conversations, setConversations] = useState([]);
@@ -108,12 +110,16 @@ function Messenger({classes}) {
       <div className={classes.messenger}>
         <div className={classes.chatMenu}>
           <div className={classes.chatMenuWrapper}>
-            <input placeholder="Search for friends" className={classes.chatMenuInput} />
-            {conversations.map((c) => (
-              <div onClick={() => setCurrentChat(c)}>
-                <Conversation conversation={c} currentUser={user} />
-              </div>
-            ))}
+            {/* <input placeholder="Search for friends" className={classes.chatMenuInput} /> */}
+            <h1 className={classes.header}>Conversation</h1>
+            <SearchUser listOfContacts={conversations}/>
+            <div className={classes.conversationsPanel}>
+              {conversations.map((c) => (
+                <div onClick={() => setCurrentChat(c)}>
+                  <Contact conversation={c} currentUser={user} />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
         <div className={classes.chatBox}>
