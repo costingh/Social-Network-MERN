@@ -1,4 +1,3 @@
-import "./messenger.css";
 import Topbar from "../../components/topbar/Topbar";
 import Conversation from "../../components/conversation/Conversation";
 import Message from "../../components/message/Message";
@@ -7,8 +6,10 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import {io} from "socket.io-client";
+import { withStyles } from '@material-ui/core/styles';
+import {styles} from './messengerStyle'
 
-function Messenger() {
+function Messenger({classes}) {
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -104,10 +105,10 @@ function Messenger() {
   return (
     <>
       <Topbar />
-      <div className="messenger">
-        <div className="chatMenu">
-          <div className="chatMenuWrapper">
-            <input placeholder="Search for friends" className="chatMenuInput" />
+      <div className={classes.messenger}>
+        <div className={classes.chatMenu}>
+          <div className={classes.chatMenuWrapper}>
+            <input placeholder="Search for friends" className={classes.chatMenuInput} />
             {conversations.map((c) => (
               <div onClick={() => setCurrentChat(c)}>
                 <Conversation conversation={c} currentUser={user} />
@@ -115,38 +116,38 @@ function Messenger() {
             ))}
           </div>
         </div>
-        <div className="chatBox">
-          <div className="chatBoxWrapper">
+        <div className={classes.chatBox}>
+          <div className={classes.chatBoxWrapper}>
             {currentChat ? (
               <>
-                <div className="chatBoxTop">
+                <div className={classes.chatBoxTop}>
                   {messages.map((m) => (
                     <div ref={scrollRef}>
                       <Message message={m} own={m.sender === user._id} />
                     </div>
                   ))}
                 </div>
-                <div className="chatBoxBottom">
+                <div className={classes.chatBoxBottom}>
                   <textarea
-                    className="chatMessageInput"
+                    className={classes.chatMessageInput}
                     placeholder="write something..."
                     onChange={(e) => setNewMessage(e.target.value)}
                     value={newMessage}
                   ></textarea>
-                  <button className="chatSubmitButton" onClick={handleSubmit}>
+                  <button className={classes.chatSubmitButton} onClick={handleSubmit}>
                     Send
                   </button>
                 </div>
               </>
             ) : (
-              <span className="noConversationText">
+              <span className={classes.noConversationText}>
                 Open a conversation to start a chat.
               </span>
             )}
           </div>
         </div>
-        <div className="chatOnline">
-          <div className="chatOnlineWrapper">
+        <div className={classes.chatOnline}>
+          <div className={classes.chatOnlineWrapper}>
             <ChatOnline
               onlineUsers={onlineUsers}
               currentId={user._id}
@@ -159,4 +160,4 @@ function Messenger() {
   );
 }
 
-export default Messenger;
+export default withStyles(styles)(Messenger);

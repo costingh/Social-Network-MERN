@@ -45,7 +45,9 @@ function Topbar({ classes }) {
                         <span className={classes.topbarIconBadge}>1</span>
                     </div>
                     <div className={classes.topbarIconItem}>
-                        <Chat/>
+                        <Link to='/messenger' style={{textDecoration: 'none', color: 'inherit'}}>
+                            <Chat/>
+                        </Link>
                         <span className={classes.topbarIconBadge}>3</span>
                     </div>
                     <div className={classes.topbarIconItem}>
