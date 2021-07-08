@@ -1,9 +1,11 @@
 export const styles = {
     "profile": {
-      "display": "flex"
+      "display": "flex",
     },
     "profileRight": {
-      "flex": "9"
+      "flex": "9",
+      background: '#1b2439',
+      position: 'relative'
     },
     "profileCover": {
       "height": "320px",
@@ -45,6 +47,6 @@ export const styles = {
       marginTop: '5px'
     },
     "profileRightBottom": {
-      "display": "flex"
+      "display": "flex",
     }
   }

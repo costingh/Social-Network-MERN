@@ -51,6 +51,60 @@ export default function ChatOnline({onlineUsers, currentId, setCurrentChat}) {
           <span className="chatOnlineName">{o?.username}</span>
         </div>
       ))}
+
+      <div className="chatOnlineFriend">
+          <div className="chatOnlineImgContainer">
+            <img
+              className="chatOnlineImg"
+              src={
+                PF + "person/noAvatar.png"
+              }
+              alt=""
+            />
+            <div className="chatOnlineBadge"></div>
+          </div>
+          <span className="chatOnlineName">John Doe</span>
+        </div>
+        <div className="chatOnlineFriend">
+          <div className="chatOnlineImgContainer">
+            <img
+              className="chatOnlineImg"
+              src={
+                PF + "person/noAvatar.png"
+              }
+              alt=""
+            />
+            <div className="chatOnlineBadge"></div>
+          </div>
+          <span className="chatOnlineName">John Doe</span>
+        </div>
+        <div className="chatOnlineFriend">
+          <div className="chatOnlineImgContainer">
+            <img
+              className="chatOnlineImg"
+              src={
+                PF + "person/noAvatar.png"
+              }
+              alt=""
+            />
+            <div className="chatOnlineBadge"></div>
+          </div>
+          <span className="chatOnlineName">John Doe</span>
+        </div>
+        <div className="chatOnlineFriend">
+          <div className="chatOnlineImgContainer">
+            <img
+              className="chatOnlineImg"
+              src={
+                PF + "person/noAvatar.png"
+              }
+              alt=""
+            />
+            <div className="chatOnlineBadge"></div>
+          </div>
+          <span className="chatOnlineName">John Doe</span>
+        </div>
+
     </div>
   );
 }

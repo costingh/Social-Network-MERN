@@ -1,22 +1,11 @@
 export const styles = {
   "sidebar": {
     "flex": "3",
-    "height": "calc(100vh - 50px)",
+    "height": "calc(100vh - 80px)",
     "overflowY": "scroll",
     "position": "sticky",
     "top": "50px",
     background: '#1b2439',
-  },
-  '@global': {
-    '*::-webkit-scrollbar': {
-      width: '5px'
-    },
-    '*::-webkit-scrollbar-track': {
-      "backgroundColor": "#273047"
-    },
-    '*::-webkit-scrollbar-thumb': {
-      "backgroundColor": "#111"
-    }
   },
   "sidebarWrapper": {
     background: '#1b2439',
