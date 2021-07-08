@@ -1,10 +1,10 @@
 export const styles = {
     contact: {
-        width: '100%',
+        width: '95%',
         height: '60px',
         background: '#1b2439',
-        padding: '10px',
-        margin: '20px 0px',
+        padding: '40px 10px',
+        margin: '20px auto',
         borderRadius: '5px',
         display: 'flex',
         justifyContent: 'space-between',

@@ -6,7 +6,8 @@ export const styles = {
       overflow: 'hidden'
     },
     "chatMenu": {
-      "flex": "2.5"
+      "flex": "3",
+      paddingRight: '30px'
     },
     "chatMenuInput": {
       "width": "90%",
@@ -15,23 +16,32 @@ export const styles = {
       "borderBottom": "1px solid gray"
     },
     "chatBox": {
-      "flex": "5.5"
+      "flex": "4",
+      position: 'relative',
+      margin: 0,
+      padding: 0
     },
     "chatBoxWrapper": {
-      "padding": "10px",
       "height": "100%",
-      background: '#202a41'
+      width: '100%',
+      position: 'relative',
+      background: '#202a41',
     },
     "chatBoxTop": {
-      "height": "100%",
+      "height": "85%",
       "overflowY": "scroll",
-      "paddingRight": "10px",
+      overflowX:'hidden',
+      width: '100%',
+      paddingRight: '50px',
+      paddingLeft: '50px',
+      position: 'relative',
     },
     "chatBoxBottom": {
       "marginTop": "5px",
       "display": "flex",
       "alignItems": "center",
-      "justifyContent": "space-between"
+      "justifyContent": "space-between",
+      height: '15%'
     },
     "chatMessageInput": {
       "width": "80%",
@@ -48,7 +58,7 @@ export const styles = {
       "color": "white"
     },
     "chatOnline": {
-      "flex": "3"
+      "flex": "4"
     },
     "chatMenuWrapper": {
       "padding": "10px",
@@ -56,7 +66,7 @@ export const styles = {
       background: '#202a41'
     },
     "chatOnlineWrapper": {
-      "padding": "10px",
+      "padding": "20px",
       "height": "100%",
       background: '#202a41',
     },
@@ -93,4 +103,113 @@ export const styles = {
       fontSize: '19px',
       color: '#cdd1d9',
   },
+    typeMsg: {
+        position: 'relative',
+        width: '95%',
+        height: '60px',
+        margin: '0 auto',
+        marginBottom: '30px',
+    },
+    form: {
+        height: '100%',
+        width: '100%'
+    },
+    input: {
+        height: '100%',
+        width: '100%',
+        background: '#1b2439',
+        appearance: 'none !important',
+        outline: 'none',
+        border: 'none',
+        padding: '0px 30px',
+        color: '#cdd1d9',
+    },
+    send: {
+        position: 'absolute',
+        color: '#ff458a',
+        right: '20px',
+        top: '50%',
+        transform: 'translateY(-50%)'
+    }
   }
+
+
+  /* const styles = ({
+    container: {
+        width: '100%',
+        height: '100%',
+        position: 'relative',
+        borderLeft: '1px solid #1b2439',
+        borderRight: '1px solid #1b2439'
+    },
+    topbar: {
+        width: '115%',
+        position: 'absolute',
+        background: '#1b2439',
+        height: '90px',
+        padding: '15px 30px',
+        marginTop: '70px',
+        marginLeft: '-7.5%',
+        display: 'flex',
+        justifYContent: 'start',
+        alignItems: 'center'
+    },
+    profilePicture: {
+        position: 'relative',
+        borderRadius: '50%',
+        width: '55px',
+        height: '55px',
+        objectFit: 'cover',
+        marginRight: '15px'
+    },
+    text: {
+        '& h1': {
+            color: '#dfe2e9',
+            fontSize: '19px',
+        },
+        '& p': {
+            color: '#a4a7b3',
+            fontSize: '15px',
+            marginTop: '8px'
+        }
+    },
+    msgContainer: {
+        position: 'absolute',
+        width: '100%',
+        height: 'calc(100% - 260px)',
+        overflowY: 'scroll',
+        marginTop: '160px', 
+        padding: '20px 35px'
+    },
+    typeMsg: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        width: '90%',
+        height: '60px',
+        marginBottom: '30px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+    },
+    form: {
+        height: '100%',
+        width: '100%'
+    },
+    input: {
+        height: '100%',
+        width: '100%',
+        background: '#1b2439',
+        appearance: 'none !important',
+        outline: 'none',
+        border: 'none',
+        padding: '0px 30px',
+        color: '#cdd1d9',
+    },
+    send: {
+        position: 'absolute',
+        color: '#ff458a',
+        right: '20px',
+        top: '50%',
+        transform: 'translateY(-50%)'
+    }
+}); */

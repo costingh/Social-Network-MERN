@@ -1,18 +1,15 @@
-import "./message.css";
+import { withStyles } from '@material-ui/styles';
+import {styles} from './messageStyle';
 import {format} from 'timeago.js'
 
-export default function Message({message, own }) {
-  return (
-    <div className={own ? "message own" : "message"}>
-      <div className="messageTop">
-        <img
-          className="messageImg"
-          src="https://images.pexels.com/photos/3686769/pexels-photo-3686769.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-          alt=""
-        />
-        <p className="messageText">{message.text}</p>
+function Message({classes, message, own}) {
+    return (
+      <div className={own ? classes.messageContainerRight : classes.messageContainerLeft} >     
+        <img src='https://images.pexels.com/photos/3686769/pexels-photo-3686769.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500' alt='' ></img>
+        <div>{message.text}</div>
+        <span className={classes.date}>{format(message.createdAt)}</span>
       </div>
-      <div className="messageBottom">{format(message.createdAt)}</div>
-    </div>
-  );
+    )
 }
+
+export default withStyles(styles)(Message);

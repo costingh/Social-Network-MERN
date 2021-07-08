@@ -1,5 +1,4 @@
 import Topbar from "../../components/topbar/Topbar";
-import Conversation from "../../components/conversation/Conversation";
 import Message from "../../components/message/Message";
 import ChatOnline from "../../components/chatOnline/ChatOnline";
 import { useContext, useEffect, useRef, useState } from "react";
@@ -10,6 +9,8 @@ import { withStyles } from '@material-ui/core/styles';
 import {styles} from './messengerStyle'
 import Contact from '../../components/contact/Contact';
 import SearchUser from "../../components/search/SearchUser";
+import Button from '@material-ui/core/Button';
+import SendIcon from '@material-ui/icons/Send';
 
 function Messenger({classes}) {
   const [conversations, setConversations] = useState([]);
@@ -110,7 +111,6 @@ function Messenger({classes}) {
       <div className={classes.messenger}>
         <div className={classes.chatMenu}>
           <div className={classes.chatMenuWrapper}>
-            {/* <input placeholder="Search for friends" className={classes.chatMenuInput} /> */}
             <h1 className={classes.header}>Conversation</h1>
             <SearchUser listOfContacts={conversations}/>
             <div className={classes.conversationsPanel}>
@@ -128,13 +128,35 @@ function Messenger({classes}) {
               <>
                 <div className={classes.chatBoxTop}>
                   {messages.map((m) => (
-                    <div ref={scrollRef}>
+                    <div ref={scrollRef} style={{width: '100%'}}>
                       <Message message={m} own={m.sender === user._id} />
                     </div>
                   ))}
                 </div>
                 <div className={classes.chatBoxBottom}>
-                  <textarea
+                <div className={classes.typeMsg}>
+                  <form id="chat-form" className={classes.form}>
+                      <input
+                          id="msg"
+                          type="text"
+                          placeholder="Type a message here..."
+                          required
+                          autoComplete="off"
+                          className={classes.input}
+                          onChange={(e) => setNewMessage(e.target.value)}
+                          value={newMessage}
+                      />
+                      <Button 
+                        className={classes.send} 
+                        aria-label="Send" 
+                        type="submit"
+                        onClick={handleSubmit}
+                      >
+                          <SendIcon />
+                      </Button>
+                  </form>
+                </div>   
+                  {/* <textarea
                     className={classes.chatMessageInput}
                     placeholder="write something..."
                     onChange={(e) => setNewMessage(e.target.value)}
@@ -142,7 +164,7 @@ function Messenger({classes}) {
                   ></textarea>
                   <button className={classes.chatSubmitButton} onClick={handleSubmit}>
                     Send
-                  </button>
+                  </button> */}
                 </div>
               </>
             ) : (
