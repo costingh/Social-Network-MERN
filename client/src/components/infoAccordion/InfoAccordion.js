@@ -8,8 +8,11 @@ import Typography from '@material-ui/core/Typography';
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import PhoneIcon from '@material-ui/icons/Phone';
 import WatchLaterIcon from '@material-ui/icons/WatchLater';
+import LocationCityIcon from '@material-ui/icons/LocationCity';
+import PeopleIcon from '@material-ui/icons/People';
+
+import {format} from 'timeago.js'
 
 const styles = ({
   root: {
@@ -45,7 +48,7 @@ const styles = ({
   }
 });
 
-function InfoAccordion({classes}) {
+function InfoAccordion({classes, contact}) {
   const [expanded, setExpanded] = useState('panel1');
 
   const handleChange = (panel) => (event, newExpanded) => {
@@ -65,13 +68,16 @@ function InfoAccordion({classes}) {
         </AccordionSummary>
         <AccordionDetails className={classes.inner}>
           <Typography className={classes.typography}>
-            <MailOutlineIcon className={classes.icon}/> john.doe@gmail.com
+            <MailOutlineIcon className={classes.icon}/> {contact ? contact.email : 'john.doe@gmail.com'}
           </Typography>
           <Typography className={classes.typography}>
-            <PhoneIcon className={classes.icon}/> +1 (786) 903 - 7331
+            <PeopleIcon className={classes.icon}/> {`${contact ? contact.followers.length : 0} followers`}
           </Typography>
           <Typography className={classes.typography}>
-            <WatchLaterIcon className={classes.icon}/> 04.05.2020
+            <LocationCityIcon className={classes.icon}/> {contact ? (contact.city ? contact.city : 'Unknow') : 'Not available'}
+          </Typography>
+          <Typography className={classes.typography}>
+            <WatchLaterIcon className={classes.icon}/> {contact ? format(contact.createdAt) : '-'}
           </Typography>
         </AccordionDetails>
       </Accordion>

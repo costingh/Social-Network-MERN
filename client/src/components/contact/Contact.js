@@ -9,7 +9,7 @@ function Contact({classes, conversation, currentUser, currentChat }) {
     const [user, setUser] = useState(null);
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     const [lastMessage, setLastMessage] = useState({
-      text: 'Last message',
+      text: 'No messages sent...',
       createdAt: '2021-06-27T20:40:21.739Z'
     });
 
@@ -26,10 +26,16 @@ function Contact({classes, conversation, currentUser, currentChat }) {
       };
       getUser();
 
-      getUser().then(() => {setLastMessage({
-        text: conversation.lastMessage[0].text,
-        createdAt: conversation.lastMessage[0].createdAt
-      });})
+      getUser().then(() => {
+        setTimeout(() => {
+          if(conversation.lastMessage.length) {
+            setLastMessage({
+              text: conversation.lastMessage[0].text,
+              createdAt: conversation.lastMessage[0].createdAt
+            });
+          }
+        }, 1000)
+      })
     }, [currentUser, conversation]);
 
     return (

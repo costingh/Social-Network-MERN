@@ -1,6 +1,7 @@
 export const styles = {
     "chatOnline": {
-      "flex": "4"
+      "flex": "4",
+      height: '100%'
     },
     "chatOnlineWrapper": {
       "padding": "20px",

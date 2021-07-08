@@ -141,6 +141,7 @@ function Messenger({ classes }) {
 					onlineUsers={onlineUsers}
 					userId={user._id}
 					setCurrentChat={setCurrentChat}
+					currentChat={currentChat}
 				/>
 			</div>
         </>
