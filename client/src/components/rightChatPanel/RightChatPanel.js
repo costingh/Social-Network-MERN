@@ -10,13 +10,13 @@ function RightChatPanel({classes, onlineUsers, userId, setCurrentChat, currentCh
                 currentChat={currentChat}
                 userId={userId}
             />
-            {/* <div className={classes.chatOnlineWrapper}>
+            <div className={classes.chatOnlineWrapper}>
                 <ChatOnline
                     onlineUsers={onlineUsers}
                     currentId={userId}
                     setCurrentChat={setCurrentChat}
                 />
-            </div> */}
+            </div>
         </div>
     )
 }

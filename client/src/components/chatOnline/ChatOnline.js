@@ -1,110 +1,64 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import "./chatOnline.css";
+import { withStyles } from "@material-ui/core/styles";
+import { styles } from "./chatOnlineStyle";
 
-export default function ChatOnline({onlineUsers, currentId, setCurrentChat}) {
-  const [friends, setFriends] = useState([]);
-  const [onlineFriends, setOnlineFriends] = useState([]);
-  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+function ChatOnline({ classes, onlineUsers, currentId, setCurrentChat }) {
+    const [friends, setFriends] = useState([]);
+    const [onlineFriends, setOnlineFriends] = useState([]);
+    const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
-  useEffect(() => {
-    const getFriends = async () => {
-      const res = await axios.get("/users/friends/" + currentId);
-      setFriends(res.data);
+    useEffect(() => {
+        const getFriends = async () => {
+            const res = await axios.get("/users/friends/" + currentId);
+            setFriends(res.data);
+        };
+
+        getFriends();
+    }, [currentId]);
+
+    useEffect(() => {
+        setOnlineFriends(friends.filter((f) => onlineUsers.includes(f._id)));
+        console.log(onlineFriends);
+    }, [friends, onlineUsers]);
+
+    const handleClick = async (user) => {
+        try {
+            const res = await axios.get(
+                `/conversations/find/${currentId}/${user._id}`
+            );
+            setCurrentChat(res.data);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
-    getFriends();
-  }, [currentId]);
-
-  useEffect(() => {
-    setOnlineFriends(friends.filter((f) => onlineUsers.includes(f._id)));
-    console.log(onlineFriends)
-  }, [friends, onlineUsers]);
-
-  const handleClick = async (user) => {
-    try {
-      const res = await axios.get(
-        `/conversations/find/${currentId}/${user._id}`
-      );
-      setCurrentChat(res.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  
-  return (
-    <div className="chatOnline">
-      {onlineFriends.map((o) => (
-        <div className="chatOnlineFriend" onClick={() => handleClick(o)}>
-          <div className="chatOnlineImgContainer">
-            <img
-              className="chatOnlineImg"
-              src={
-                o?.profilePicture
-                  ? PF + o.profilePicture
-                  : PF + "person/noAvatar.png"
-              }
-              alt=""
-            />
-            <div className="chatOnlineBadge"></div>
-          </div>
-          <span className="chatOnlineName">{o?.username}</span>
+    return (
+        <div className={classes.chatOnline}>
+            {onlineFriends.map((o) => (
+                <div
+                    className={classes.chatOnlineFriend}
+                    onClick={() => handleClick(o)}
+                >
+                    <div className={classes.chatOnlineImgContainer}>
+                        <img
+                            className={classes.chatOnlineImg}
+                            src={
+                                o?.profilePicture
+                                    ? PF + o.profilePicture
+                                    : PF + "person/noAvatar.png"
+                            }
+                            alt=""
+                        />
+                        <div className={classes.chatOnlineBadge}></div>
+                    </div>
+                    <span className={classes.chatOnlineName}>
+                        {o?.username}
+                    </span>
+                </div>
+            ))}
         </div>
-      ))}
-
-      <div className="chatOnlineFriend">
-          <div className="chatOnlineImgContainer">
-            <img
-              className="chatOnlineImg"
-              src={
-                PF + "person/noAvatar.png"
-              }
-              alt=""
-            />
-            <div className="chatOnlineBadge"></div>
-          </div>
-          <span className="chatOnlineName">John Doe</span>
-        </div>
-        <div className="chatOnlineFriend">
-          <div className="chatOnlineImgContainer">
-            <img
-              className="chatOnlineImg"
-              src={
-                PF + "person/noAvatar.png"
-              }
-              alt=""
-            />
-            <div className="chatOnlineBadge"></div>
-          </div>
-          <span className="chatOnlineName">John Doe</span>
-        </div>
-        <div className="chatOnlineFriend">
-          <div className="chatOnlineImgContainer">
-            <img
-              className="chatOnlineImg"
-              src={
-                PF + "person/noAvatar.png"
-              }
-              alt=""
-            />
-            <div className="chatOnlineBadge"></div>
-          </div>
-          <span className="chatOnlineName">John Doe</span>
-        </div>
-        <div className="chatOnlineFriend">
-          <div className="chatOnlineImgContainer">
-            <img
-              className="chatOnlineImg"
-              src={
-                PF + "person/noAvatar.png"
-              }
-              alt=""
-            />
-            <div className="chatOnlineBadge"></div>
-          </div>
-          <span className="chatOnlineName">John Doe</span>
-        </div>
-
-    </div>
-  );
+    );
 }
+
+export default withStyles(styles)(ChatOnline);

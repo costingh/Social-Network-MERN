@@ -1,52 +1,16 @@
-import React, {useState} from 'react';
-
-import { withStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
-
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import WatchLaterIcon from '@material-ui/icons/WatchLater';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
 import PeopleIcon from '@material-ui/icons/People';
-
 import {format} from 'timeago.js'
-
-const styles = ({
-  root: {
-    width: '100%',
-    borderRadius: '10px',
-  },
-  header: {
-    background: '#1b2439',
-    color: '#cdd1d9',
-  },
-  inner: {
-    background: '#1b2439',
-    color: '#a4a7b3',
-    display: 'block'
-  },
-  heading: {
-    fontSize: '17px',
-    fontWeight: 400,
-  },
-  typography: {
-    display: 'flex',
-    width: '100%',
-    marginBottom: '18px',
-    fontSize: '17px',
-  },
-  icon: {
-    marginRight: '15px',
-    color: '#888',
-    fontSize: '17px',
-  },
-  expandIcon: {
-    color: '#cdd1d9',
-  }
-});
+import { styles } from './infoAccordionStyle';
+import { withStyles } from '@material-ui/core/styles';
+import { useState } from 'react';
 
 function InfoAccordion({classes, contact}) {
   const [expanded, setExpanded] = useState('panel1');

@@ -51,10 +51,10 @@ function ContactInfo({ classes, userId, currentChat }) {
                     contact={contact}
                 />
             </div>
-            <div className={classes.addContact}>
+            {/* <div className={classes.addContact}>
                 <AddIcon style={{ marginRight: "15px" }} />
                 <p>Add Contact</p>
-            </div>
+            </div> */}
         </div>
     );
 }

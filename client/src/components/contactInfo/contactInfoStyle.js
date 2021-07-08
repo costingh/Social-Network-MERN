@@ -1,7 +1,7 @@
 export const styles = ({
     inner: {
         width: '100%',
-        height: '100%',
+        height: 'auto',
         position: 'relative',
         padding: '0px 75px',
         paddingTop: '70px',
@@ -37,7 +37,7 @@ export const styles = ({
     },
     description: {
         color: '#dfe2e9',
-        fontSize: '18px',
+        fontSize: '16px',
         fontWeight: 400,
         marginTop: '20px',
         textAlign: 'center',
