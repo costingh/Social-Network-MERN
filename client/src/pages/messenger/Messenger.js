@@ -46,7 +46,6 @@ function Messenger({classes}) {
       setOnlineUsers(
         user.followings.filter((f) => users.some((u) => u.userId === f))
       );
-      console.log(user)
     });
   }, [user]);
 
@@ -55,12 +54,27 @@ function Messenger({classes}) {
       try {
         const res = await axios.get("/conversations/" + user._id);
         setConversations(res.data);
+        console.log(res.data)
       } catch (err) {
         console.log(err);
       }
     };
     getConversations();
   }, [user._id]);
+
+  useEffect(() => {
+    const getLastMessages = () => {
+      try {
+        conversations.map( async c => {
+          const res = await axios.get("/messages/last-message/" + c._id);
+          c.lastMessage = res.data;
+        })
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getLastMessages();
+  }, [conversations]);
 
   useEffect(() => {
     const getMessages = async () => {
@@ -116,7 +130,7 @@ function Messenger({classes}) {
             <div className={classes.conversationsPanel}>
               {conversations.map((c) => (
                 <div onClick={() => setCurrentChat(c)}>
-                  <Contact conversation={c} currentUser={user} />
+                  <Contact key={c._id} conversation={c} currentUser={user} currentChat={currentChat}/>
                 </div>
               ))}
             </div>
@@ -128,8 +142,8 @@ function Messenger({classes}) {
               <>
                 <div className={classes.chatBoxTop}>
                   {messages.map((m) => (
-                    <div ref={scrollRef} style={{width: '100%'}}>
-                      <Message message={m} own={m.sender === user._id} />
+                    <div ref={scrollRef}>
+                      <Message key={m._id} message={m} own={m.sender === user._id} />
                     </div>
                   ))}
                 </div>

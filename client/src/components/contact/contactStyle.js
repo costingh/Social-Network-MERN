@@ -25,11 +25,11 @@ export const styles = {
         }
     },
     'activeContact': {
-        width: '100%',
+        width: '95%',
         height: '60px',
         background: '#ff458a',
-        padding: '10px',
-        margin: '20px 0px',
+        padding: '40px 10px',
+        margin: '20px auto',
         borderRadius: '5px',
         display: 'flex',
         justifyContent: 'space-between',
@@ -52,8 +52,8 @@ export const styles = {
         alignItems: 'center',
         '& img': {
             borderRadius: '50%',
-            width: '40px',
-            height: '40px',
+            width: '50px',
+            height: '50px',
             objectFit: 'cover',
             marginRight: '10px'
         },

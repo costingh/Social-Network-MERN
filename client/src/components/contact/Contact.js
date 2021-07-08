@@ -3,28 +3,38 @@ import axios from "axios";
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import { withStyles } from '@material-ui/core/styles';
 import {styles} from './contactStyle';
+import {format} from 'timeago.js'
 
-function Contact({classes, conversation, currentUser}) {
+function Contact({classes, conversation, currentUser, currentChat }) {
     const [user, setUser] = useState(null);
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-  
+    const [lastMessage, setLastMessage] = useState({
+      text: 'Last message',
+      createdAt: '2021-06-27T20:40:21.739Z'
+    });
+
     useEffect(() => {
       const friendId = conversation.members.find((m) => m !== currentUser._id);
   
       const getUser = async () => {
         try {
           const res = await axios("/users?userId=" + friendId);
-          setUser(res.data);
+          setUser(res.data);       
         } catch (err) {
           console.log(err);
         }
       };
       getUser();
+
+      getUser().then(() => {setLastMessage({
+        text: conversation.lastMessage[0].text,
+        createdAt: conversation.lastMessage[0].createdAt
+      });})
     }, [currentUser, conversation]);
 
     return (
         <div 
-            className={classes.contact}
+            className={currentChat?._id === conversation?._id ? classes.activeContact : classes.contact}
             >
             <div className={classes.left}>
                 <img src={
@@ -34,12 +44,12 @@ function Contact({classes, conversation, currentUser}) {
                 }></img>
                 <div className={classes.text}>
                     <h1>{user?.username}</h1>
-                    <p>Last message</p>
+                    <p>{lastMessage.text}</p>
                 </div>
             </div>
             <div className={classes.right}>
                 <MoreHorizIcon className={classes.moreIcon}/>
-                <p>3 hours ago</p>
+                <p>{format(lastMessage.createdAt)}</p>
             </div>
         </div>
     )
