@@ -18,7 +18,9 @@ To run this project locally, you need to navigate in the project directory. Here
 * api
 * client
 * socket
+
 To run the development server, 3 terminals need to be opened, and navigate to each of the above folders where the following command needs to be run:
+
 ```bash
 yarn start
 ```
@@ -31,11 +33,11 @@ yarn start
 ```
 Terminal 2:
 ```bash
-cd client
+cd api
 yarn start
 ```
 Terminal 3:
 ```bash
-cd client
+cd socket
 yarn start
 ```
