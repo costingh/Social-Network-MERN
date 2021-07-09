@@ -1,32 +1,9 @@
-import { useState, useEffect } from "react";
 import { withStyles } from "@material-ui/styles";
 import InfoAccordion from "../infoAccordion/InfoAccordion";
-import AddIcon from "@material-ui/icons/Add";
-import axios from "axios";
 import { styles } from "./contactInfoStyle";
 
-function ContactInfo({ classes, userId, currentChat }) {
-    const [contact, setContact] = useState(null);
+function ContactInfo({ classes, contact }) {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-    
-    useEffect(() => {
-        if(currentChat) {
-            const friendId = currentChat.members.find(
-                (member) => member !== userId
-            );
-    
-            const getContact = async () => {
-                try {
-                    const res = await axios.get(`/users?userId=${friendId}`);
-                    setContact(res.data);
-                    console.log(res.data);
-                } catch (err) {
-                    console.log(err);
-                }
-            };
-            getContact();
-        }
-    }, [userId, currentChat]);
 
     return (
         <div className={classes.inner}>
@@ -51,10 +28,6 @@ function ContactInfo({ classes, userId, currentChat }) {
                     contact={contact}
                 />
             </div>
-            {/* <div className={classes.addContact}>
-                <AddIcon style={{ marginRight: "15px" }} />
-                <p>Add Contact</p>
-            </div> */}
         </div>
     );
 }

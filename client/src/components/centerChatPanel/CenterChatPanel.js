@@ -3,8 +3,14 @@ import Button from "@material-ui/core/Button";
 import SendIcon from "@material-ui/icons/Send";
 import { withStyles } from "@material-ui/core/styles";
 import { styles } from "./centerChatPanelStyle";
+import { useEffect, useRef } from "react";
+function CenterChatPanel({classes, currentChat, messages, setNewMessage, newMessage, handleSubmit, user, contact}) {
+    const scrollRef = useRef();
 
-function CenterChatPanel({classes, currentChat, messages, scrollRef, setNewMessage, newMessage, handleSubmit, user}) {
+    /* useEffect(() => {
+        scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [messages]);
+ */
     return (
         <div className={classes.chatBox}>
             <div className={classes.chatBoxWrapper}>
@@ -17,6 +23,8 @@ function CenterChatPanel({classes, currentChat, messages, scrollRef, setNewMessa
                                         key={m._id}
                                         message={m}
                                         own={m.sender === user._id}
+                                        user={user}
+                                        contact={contact}
                                     />
                                 </div>
                             ))}

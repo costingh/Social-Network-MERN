@@ -16,8 +16,8 @@ function Messenger({ classes }) {
     const [newMessage, setNewMessage] = useState("");
     const [arrivalMessage, setArrivalMessage] = useState(null);
     const [onlineUsers, setOnlineUsers] = useState([]);
+    const [contact, setContact] = useState(null);
     const { user } = useContext(AuthContext);
-    const scrollRef = useRef();
     const socket = useRef();
 
     useEffect(() => {
@@ -29,6 +29,7 @@ function Messenger({ classes }) {
                 createdAt: Date.now(),
             });
         });
+        console.log('connected....')
     }, []);
 
     useEffect(() => {
@@ -37,6 +38,7 @@ function Messenger({ classes }) {
             setMessages((prev) => [...prev, arrivalMessage]);
     }, [arrivalMessage, currentChat]);
 
+    // add user to an array of Online users
     useEffect(() => {
         socket.current.emit("addUser", user._id);
         socket.current.on("getUsers", (users) => {
@@ -46,6 +48,7 @@ function Messenger({ classes }) {
         });
     }, [user]);
 
+    // get all conversations and display them in the left panel
     useEffect(() => {
         const getConversations = async () => {
             try {
@@ -59,6 +62,7 @@ function Messenger({ classes }) {
         getConversations();
     }, [user._id]);
 
+    // get the last message from each conversation
     useEffect(() => {
         const getLastMessages = () => {
             try {
@@ -87,6 +91,25 @@ function Messenger({ classes }) {
         getMessages();
     }, [currentChat]);
 
+    // get contact data
+    useEffect(() => {
+        if(currentChat) {
+            const friendId = currentChat.members.find(
+                (member) => member !== user._id
+            );
+    
+            const getContact = async () => {
+                try {
+                    const res = await axios.get(`/users?userId=${friendId}`);
+                    setContact(res.data);
+                } catch (err) {
+                    console.log(err);
+                }
+            };
+            getContact();
+        }
+    }, [user._id, currentChat]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const message = {
@@ -113,10 +136,7 @@ function Messenger({ classes }) {
             console.log(err);
         }
     };
-
-    useEffect(() => {
-        scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, [messages]);
+    
 
     return (
         <>
@@ -131,17 +151,17 @@ function Messenger({ classes }) {
 				<CenterChatPanel
 					currentChat={currentChat}
 					messages={messages}
-					scrollRef={scrollRef}
 					setNewMessage={setNewMessage}
 					newMessage={newMessage}
 					handleSubmit={handleSubmit}
 					user={user}
+                    contact={contact}
 				/>
 				<RightChatPanel
 					onlineUsers={onlineUsers}
 					userId={user._id}
 					setCurrentChat={setCurrentChat}
-					currentChat={currentChat}
+                    contact={contact}
 				/>
 			</div>
         </>
