@@ -14,30 +14,10 @@ This app was created using Node.js for backend, MongoDB as database, Express.js 
 
 ## Available Scripts
 
-To run this project locally, you need to navigate in the project directory. Here there are 3 folders:
-* api
-* client
-* socket
-
-To run the development server, 3 terminals need to be opened, and navigate to each of the above folders where the following command needs to be run:
+To run this project locally, you need to navigate in the project directory, where start.sh file is and run the following command:
 
 ```bash
-yarn start
+./start.sh
 ```
 
-Example:
-Terminal 1:
-```bash
-cd client
-yarn start
-```
-Terminal 2:
-```bash
-cd api
-yarn start
-```
-Terminal 3:
-```bash
-cd socket
-yarn start
-```
+This will start the client, api and socket servers.
